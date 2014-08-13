@@ -5,11 +5,6 @@ VAGRANTFILE_API_VERSION = "2"
 
 ENV['VAGRANT_DEFAULT_PROVIDER'] ||= 'docker'
 
-if ! ENV.has_key?("MYSQL_SETUP")
-  puts 'required environment variables not setup, please source defaults'
-  exit 1
-end
-
 # we require defaults
 if ! ENV.has_key?("MYSQL_SETUP")
   puts 'required environment variables not setup, please source defaults'
