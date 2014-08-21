@@ -1,5 +1,5 @@
-# Dockerfile Vagrant MySQL Server 6.0
-Setup your own mysql server 6.0 image with ubuntu 14.04
+# Dockerfile Vagrant MySQL Server 5.6
+Setup your own mysql server 5.6 image with ubuntu 14.04
 
 ## MySQL Server
 Setup your own awesome MySQL server, and soon (very soon), we will integrate with some awesome data replication tool setup!
