@@ -17,7 +17,7 @@ You will need docker and vagrant installed on your system.
 Instead of storing sensitive information in this public repository, I make use of environment variables that you pass in.
 
 ### Build the container
-Creating the container is a simple as running vagrant up.
+Creating the container is a simple as sourcing the defaults file and running vagrant up.
 
 ```
 $ source defaults.env; vagrant up
