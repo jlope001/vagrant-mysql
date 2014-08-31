@@ -18,22 +18,22 @@ mysql -u root -e " \
 mysqladmin -uroot -p$MYSQL_ROOT_PASSWORD shutdown
 
 # setup replication
-if [ ! -z "MYSQL_DATABASES_REPLICATION_ALLOW" ]; then
-  sed -i 's/#server-id/server-id/g' /etc/my.cnf
-  sed -i 's/#log_bin/log_bin/g' /etc/my.cnf
+if [ ! -z "$MYSQL_DATABASES_REPLICATION_ALLOW" ] || [ ! -z "$MYSQL_DATABASES_REPLICATION_DENY" ]; then
+  echo "server-id = 1" >> /etc/my.cnf
+  echo "log_bin = /var/lib/mysql/mysql-bin.log" >> /etc/my.cnf
+  echo "sync_binlog=1" >> /etc/my.cnf
+fi
 
-  # create replication on all databases
+# create replication on all databases
+if [ ! -z "$MYSQL_DATABASES_REPLICATION_ALLOW" ]; then
   arr=($MYSQL_DATABASES_REPLICATION_ALLOW)
   for x in $arr
   do
     echo "binlog_do_db = $x" >> /etc/my.cnf
   done
 fi
-if [ ! -z "MYSQL_DATABASES_REPLICATION_DENY" ]; then
-  sed -i 's/#server-id/server-id/g' /etc/my.cnf
-  sed -i 's/#log_bin/log_bin/g' /etc/my.cnf
-
-  # ignore replication on all databases
+# ignore replication on specific databases
+if [ ! -z "$MYSQL_DATABASES_REPLICATION_DENY" ]; then
   arr=($MYSQL_DATABASES_REPLICATION_DENY)
   for x in $arr
   do

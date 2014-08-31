@@ -7,8 +7,8 @@ RUN yum install -y wget
 RUN wget http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
 RUN yum localinstall -y mysql-community-release-el6-5.noarch.rpm
 RUN yum install -y mysql-community-server
-
-RUN chown -R mysql:mysql /var/lib/mysql
+ADD ./assets/my.cnf /etc/my.cnf
+RUN chmod 644 /etc/my.cnf
 
 VOLUME ["/var/lib/mysql"]
 
