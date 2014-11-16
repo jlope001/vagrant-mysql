@@ -41,4 +41,8 @@ if [ ! -z "$MYSQL_DATABASES_REPLICATION_DENY" ]; then
   done
 fi
 
+# update ownership to common uid/gid
+usermod -u 1000 mysql
+groupmod -g 1000 mysql
+
 exec mysqld_safe
